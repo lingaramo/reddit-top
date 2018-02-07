@@ -1,5 +1,5 @@
 import React from 'react';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import { ListItem, ListItemText } from 'material-ui/List';
 import PropTypes from 'prop-types';
 
 const RedditPostItem = props => {
