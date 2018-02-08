@@ -4,6 +4,8 @@ import { withStyles } from 'material-ui/styles';
 import List from 'material-ui/List';
 import RedditPostItem from './RedditPostItem';
 
+import InfiniteScroll from 'react-infinite-scroller';
+
 import { connect } from 'react-redux';
 
 import { removeAllPostFromList, fetchTopPosts } from './actions';
@@ -28,14 +30,23 @@ function RedditTopList(props) {
   const listOfRedditPosts = filteredPost.map((post, index) => <RedditPostItem post={post.data} key={index} />)
 
   return (
-    <div className={classes.root}>
+    <div>
       <div>
         <h2 onClick={() => dismissAll(filteredPost.map(post => post.data.id))}>Dismiss All</h2>
       </div>
-      <List>
-        {listOfRedditPosts}
-      </List>
-      <button type="button" onClick={() => bringOlderPosts(after)}>Older posts</button>
+      <div className={classes.root}>
+        <InfiniteScroll
+            pageStart={0}
+            loadMore={() => bringOlderPosts(after)}
+            hasMore={true}
+            loader={<div className="loader" key={0}>Loading ...</div>}
+            useWindow={false}
+        >
+          <List>
+            {listOfRedditPosts}
+          </List>
+        </InfiniteScroll>
+      </div>
     </div>
   );
 }
