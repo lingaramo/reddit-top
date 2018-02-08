@@ -1,0 +1,56 @@
+.PostItem {
+  padding: 0 15px;
+  margin-bottom: 15px;
+  text-align: left;
+  border-bottom: 1px solid lightgray;
+}
+
+.PostItem:hover {
+  cursor: pointer;
+}
+
+.PostItem h2.userName {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.PostItem .thumb {
+  display: flex;
+  align-items: flex-start;
+}
+
+.PostItem img {
+  flex: 0 0 50px;
+}
+
+.PostItem h3.title {
+  margin: 0 10px;
+}
+
+.PostItem .date {
+    color: lightblue;
+    font-size: 15px;
+}
+
+.PostItem.Visited {
+    background-color: lightgray;
+}
+
+.animation-enter {
+  opacity: 0.01;
+}
+
+.animation-enter.animation-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.animation-leave {
+  opacity: 1;
+}
+
+.animation-leave.animation-leave-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
+}

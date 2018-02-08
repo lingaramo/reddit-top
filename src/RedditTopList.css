@@ -1,0 +1,18 @@
+.RedditTopList .RedditTopList-Container {
+  width: 100%;
+  background-color: white;
+  height: calc(100vh - 80px);
+  overflow: auto;
+}
+
+.RedditTopList .dismissButton {
+  background-color: transparent;
+  padding: 10px 30px;
+  border: 1px solid lightgray;
+  margin: 10px;
+}
+
+.RedditTopList .dismissButton:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}

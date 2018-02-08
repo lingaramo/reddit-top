@@ -2,15 +2,24 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
+import './RedditPost.css';
+
 const RedditPost = props => {
   const { post } = props
 
   if (post) {
     return(
-      <div>
+      <div className="Post">
+        <h1 className="Author">{post.data.author}</h1>
         <p>{post.data.title}</p>
-        <h3>{post.author}</h3>
-        <img src={post.data.preview.images["0"].source.url} alt={post.title} />
+        <img src={
+          post.data.preview ?
+            post.data.preview.images["0"].source.url
+          :
+            null
+          }
+          alt={post.title}
+          className="Image"/>
         <span>{post.data.num_comments} comments</span>
       </div>
     )

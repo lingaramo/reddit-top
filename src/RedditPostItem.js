@@ -1,44 +1,65 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
+
+import IconButton from 'material-ui/IconButton';
+import HighlightOff from 'material-ui-icons/HighlightOff';
+import RadioButtonUnchecked from 'material-ui-icons/RadioButtonUnchecked';
+import RadioButtonChecked from 'material-ui-icons/RadioButtonChecked';
+
+import { ListItemIcon } from 'material-ui/List';
 
 import { removePostFromList, visitPost, activePost } from './actions';
 
-import { ListItem, ListItemIcon } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import HighlightOff from 'material-ui-icons/HighlightOff';
+import './RedditPostItem.css';
 
 const RedditPostItem = props => {
-  const { post, removePost, viewPost } = props
+  const { post, removePost, viewPost, visited } = props
+  const slicedTitle = title => {
+    if (title.length > 100) {
+      return title.slice(0, 70) + '...'
+    }
+    return title
+  }
+
+  const onRemovePost = (e, post) => {
+    removePost(post.id)
+    e.stopPropagation()
+  }
 
   return (
-    <ListItem>
-
-
-      <div onClick={() => viewPost(post.id)}>
-        { post.thumbnail !== 'default' ?
-          <img src={post.thumbnail} alt={post.title} height={post.thumbnail_height} width={post.thumbnail_width} />
+    <li onClick={() => viewPost(post.id)} className="PostItem">
+      <h2 className="userName">
+          { visited ?
+            <IconButton aria-label="RadioButtonChecked">
+              <RadioButtonChecked />
+            </IconButton>
+            :
+            <IconButton aria-label="RadioButtonUnchecked">
+              <RadioButtonUnchecked />
+            </IconButton>
+          }
+        {post.author}
+        <span className="date">
+          {Math.round((new Date().getTime()/1000 - 1518029686)/3600)} hours ago
+        </span>
+      </h2>
+      <div className="thumb">
+        { post.thumbnail.slice(-3) === 'jpg' ?
+          <img src={post.thumbnail} alt="thumbnail"/>
           :
           null
         }
-        <h3>{post.author}</h3>
-        <h4>{Math.round((new Date().getTime()/1000 - 1518029686)/3600)} hours ago</h4>
-        <p>{post.title}</p>
-        <span>{post.num_comments} comments</span>
+        <h3 className="title">{slicedTitle(post.title)}</h3>
       </div>
+      <span>{post.num_comments} comments</span>
       <ListItemIcon>
-        <IconButton aria-label="HighlightOff" onClick={() => removePost(post.id)}>
+        <IconButton aria-label="HighlightOff" onClick={(e) => onRemovePost(e, post)}>
           <HighlightOff />
         </IconButton>
       </ListItemIcon>
-    </ListItem>
+    </li>
   )
 }
-
-RedditPostItem.propTypes = {
-  text: PropTypes.string
-};
 
 const mapDispatchToProps = dispatch => {
   return {
