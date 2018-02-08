@@ -8,11 +8,14 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux';
 
-import posts from './reducers'
+import reducers from './reducers'
 
 const loggerMiddleware = createLogger()
 
-let store = createStore(posts,
+let initialState = {}
+
+let store = createStore(reducers,
+    initialState,
     applyMiddleware(
       thunkMiddleware,
       loggerMiddleware

@@ -7,6 +7,20 @@ export const receivePosts = json => {
   }
 }
 
+export const visitPost = postId => {
+  return {
+    type: "VISIT_POST",
+    postId
+  }
+}
+
+export const activePost = postId => {
+  return {
+    type: "ACTIVE_POST",
+    postId
+  }
+}
+
 export const fetchTopPosts = (after = '') => {
   return dispatch => {
     return fetch(`http://www.reddit.com/top.json?after=${after}`).then(
