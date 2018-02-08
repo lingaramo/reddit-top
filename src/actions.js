@@ -7,6 +7,20 @@ export const receivePosts = json => {
   }
 }
 
+export const removePostFromList = postId => {
+  return {
+    type: "REMOVE_POST_FROM_LIST",
+    postId
+  }
+}
+
+export const removeAllPostFromList = postIds => {
+  return {
+    type: "REMOVE_ALL_POSTS_FROM_LIST",
+    postIds
+  }
+}
+
 export const visitPost = postId => {
   return {
     type: "VISIT_POST",

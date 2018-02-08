@@ -21,6 +21,14 @@ const posts = (state = initialState, action) => {
 
 const postStateById = (state = {}, action) => {
   switch (action.type) {
+    case 'REMOVE_POST_FROM_LIST':
+      return Object.assign({}, state,  { [action.postId]: Object.assign({}, state[action.postId], { 'removed': true })})
+    case 'REMOVE_ALL_POSTS_FROM_LIST':
+      var removedPosts = {}
+      for (let id of action.postIds){
+        removedPosts[id] = Object.assign({}, state[id], { 'removed': true })
+      }
+      return Object.assign({}, state, removedPosts )
     case 'VISIT_POST':
       return Object.assign({}, state, { [action.postId]: Object.assign({}, state[action.postId], { 'visited': true })})
     default:
