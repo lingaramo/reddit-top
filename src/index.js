@@ -14,6 +14,12 @@ const loggerMiddleware = createLogger()
 
 let initialState = {}
 
+if (localStorage.getItem("postStateById")) {
+  initialState = {
+    postStateById: JSON.parse(localStorage.getItem("postStateById"))
+  }
+}
+
 let store = createStore(reducers,
     initialState,
     applyMiddleware(
@@ -21,6 +27,13 @@ let store = createStore(reducers,
       loggerMiddleware
     )
   )
+
+let persistState = () => {
+  let postStateById = store.getState().postStateById;
+  localStorage.setItem("postStateById", JSON.stringify(postStateById))
+}
+
+let unsubscribe = store.subscribe(persistState)
 
 ReactDOM.render(
   <Provider store={store}>

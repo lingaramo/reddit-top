@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 
 const RedditPost = props => {
   const { post } = props
+
   if (post) {
     return(
       <div>
         <p>{post.data.title}</p>
         <h3>{post.author}</h3>
         <img src={post.data.preview.images["0"].source.url} alt={post.title} />
-        <span>{post.num_comments} comments</span>
+        <span>{post.data.num_comments} comments</span>
       </div>
     )
   } else {
